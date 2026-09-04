@@ -29,7 +29,7 @@
       border: none;
     }
 
-    /* Floating button penolong jika iframe diblokir browser */
+    /* Floating button dengan efek transisi */
     .fallback-btn {
       position: fixed;
       bottom: 12px;
@@ -47,9 +47,21 @@
       align-items: center;
       gap: 6px;
       backdrop-filter: blur(4px);
+      
+      /* Animasi menghilang */
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
     }
+
     .fallback-btn:hover {
       background: #0f172a;
+    }
+
+    /* Class untuk menyembunyikan tombol */
+    .fallback-btn.hidden {
+      opacity: 0;
+      visibility: hidden;
     }
   </style>
 </head>
@@ -70,11 +82,22 @@
 
   <!-- Bantuan jika guru mengalami bentrokan akun Google -->
   <a 
+    id="fallbackBtn"
     class="fallback-btn" 
     href="https://script.google.com/macros/s/AKfycbypSXD0nB9pTwGCI97UP53gsgucS5-PfWbQQDHuthrViBZko5qs5-Mifow6uvkLIEThwA/exec" 
     target="_blank">
     <span>⚠️ Tampilan Error? Klik untuk Buka Langsung</span>
   </a>
+
+  <script>
+    // Sembunyikan tombol secara otomatis setelah 5 detik (5000 ms)
+    setTimeout(function() {
+      var btn = document.getElementById('fallbackBtn');
+      if (btn) {
+        btn.classList.add('hidden');
+      }
+    }, 5000);
+  </script>
 
 </body>
 </html>
